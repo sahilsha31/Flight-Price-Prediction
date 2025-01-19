@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Prediction - Service</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #007bff, #6a11cb);
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .navbar-brand:hover {
+            color: #d1eaff;
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #6a11cb;
+        }
+
+        select,
+        input[type="datetime-local"] {
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+            background: #f9f9f9;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, #007bff, #6a11cb);
+            border: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #fff;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #6c757d;
+            background: #f1f1f1;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="http://127.0.0.1:5000/">Flight Price Prediction</a>
+        </div>
+    </nav>
+
+    <!-- Form Section -->
+    <div class="container mt-5">
+        <h2 class="text-center form-title mb-5">Plan Your Flight</h2>
+        <form action="/predict" method="post">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h5 class="card-title">Departure Date</h5>
+                        <input type="datetime-local" name="Dep_Time" id="Dep_Time" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h5 class="card-title">Arrival Date</h5>
+                        <input type="datetime-local" name="Arrival_Time" id="Arrival_Time" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h5 class="card-title">Source</h5>
+                        <select name="Source" id="Source" required>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Kolkata">Kolkata</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Chennai">Chennai</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h5 class="card-title">Destination</h5>
+                        <select name="Destination" id="Destination" required>
+                            <option value="Cochin">Cochin</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="New Delhi">New Delhi</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Kolkata">Kolkata</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h5 class="card-title">Stoppage</h5>
+                        <select name="stops" required>
+                            <option value="0">Non-Stop</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h5 class="card-title">Airline</h5>
+                        <select name="airline" id="airline" required>
+                            <option value="Jet Airways">Jet Airways</option>
+                            <option value="IndiGo">IndiGo</option>
+                            <option value="Air India">Air India</option>
+                            <option value="Multiple carriers">Multiple carriers</option>
+                            <option value="SpiceJet">SpiceJet</option>
+                            <option value="Vistara">Vistara</option>
+                            <option value="Air Asia">Air Asia</option>
+                            <option value="GoAir">GoAir</option>
+                            <option value="Multiple carriers Premium economy">Multiple carriers Premium economy</option>
+                            <option value="Jet Airways Business">Jet Airways Business</option>
+                            <option value="Vistara Premium economy">Vistara Premium economy</option>
+                            <option value="Trujet">Trujet</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <input type="submit" value="Submit" class="btn btn-secondary">
+            </div>
+        </form>
+
+        <h3 class="text-center mt-4">{{ prediction_text }}</h3>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>©2024 Sahil Sharma. <a href="http://127.0.0.1:5000/">Back to Home</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
